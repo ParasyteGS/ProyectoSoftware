@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="../static/css/output.css" />
+		<title>Document</title>
+	</head>
+	<body class="bg-black min-h-screen">
+		<div class="navbar bg-base-100 border-b-2 border-neutral-800 font-K2D">
+			<div class="flex-1">
+				<a
+					href="/"
+					class="btn btn-ghost rounded-md normal-case text-xl">
+					<span class="">Elec<span class="text-green-400">Trade</span></span>
+				</a>
+			</div>
+			<div>
+				<ul class="menu menu-horizontal justify-end items-center">
+					<li>
+						<a
+							href="/component"
+							class="rounded-md hover:text-green-400"
+							>Componentes</a
+						>
+					</li>
+					<li>
+						<a
+							href="/services"
+							class="rounded-md hover:text-green-400"
+							>Servicios</a
+						>
+					</li>
+					<li>
+						<div class="rounded-md">
+							<div class="form-control">
+								<input
+									type="text"
+									placeholder="Search"
+									class="input input-ghost input-sm rounded-md border-2 border-neutral-700 w-80" />
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		{%block content%}{%endblock%}
+	</body>
+</html>
