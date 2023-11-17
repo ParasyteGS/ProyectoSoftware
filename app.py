@@ -19,7 +19,7 @@ db = client['Electrade']
 @app.route('/')
 def index():
     return render_template('main.html')
-@app.route('/login')
+
 
 @app.route('/register')
 def register():
