@@ -1,8 +1,9 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %} {%block title%}ElecTrade - Home{%endblock%} {%block
+content %}
 
 <div id="IndexPage">
 	<div class="font-K2D">
-		<div class="p-20 flex space-x-40 justify-center">
+		<div class="p-20 flex items-center space-x-40 justify-center">
 			<div class="w-96 text-center grid grid-rows-2 gap-4">
 				<div class="w-full flex">
 					<p class="text-white text-left text-3xl m-auto">
@@ -33,22 +34,22 @@
 		<div>
 			<h1 class="text-3xl text-white text-left">
 				Componentes!
-				<NuxtLink to="/components">
+				<a href="/componentes">
 					<span class="text-[16px] text-green-400 font-semibold">
 						ver todos
 					</span>
-				</NuxtLink>
+				</a>
 			</h1>
 		</div>
 
 		<div>
 			<h1 class="text-3xl text-white text-left">
 				Servicios!
-				<NuxtLink to="/services">
+				<a href="/servicios">
 					<span class="text-[16px] text-green-400 font-semibold">
 						ver todos
 					</span>
-				</NuxtLink>
+				</a>
 			</h1>
 		</div>
 	</div>

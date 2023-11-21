@@ -8,9 +8,11 @@
 		<link
 			rel="stylesheet"
 			href="../static/css/output.css" />
-		<title>Document</title>
+		<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+		<title>{%block title%}{%endblock%}</title>
 	</head>
-	<body class="bg-black min-h-screen">
+	<body class="bg-black h-screen">
 		<div class="navbar bg-base-100 border-b-2 border-neutral-800 font-K2D">
 			<div class="flex-1">
 				<a
@@ -23,28 +25,35 @@
 				<ul class="menu menu-horizontal justify-end items-center">
 					<li>
 						<a
-							href="/component"
+							href="/componentes"
 							class="rounded-md hover:text-green-400"
 							>Componentes</a
 						>
 					</li>
 					<li>
 						<a
-							href="/services"
+							href="/servicios"
 							class="rounded-md hover:text-green-400"
 							>Servicios</a
 						>
 					</li>
-					<li>
-						<div class="rounded-md">
-							<div class="form-control">
-								<input
-									type="text"
-									placeholder="Search"
-									class="input input-ghost input-sm rounded-md border-2 border-neutral-700 w-80" />
-							</div>
+					<div class="rounded-md">
+						<div class="form-control">
+							<input
+								type="text"
+								placeholder="Search"
+								class="input input-ghost input-sm rounded-md border-2 border-neutral-700 w-80" />
 						</div>
-					</li>
+					</div>
+					<div>
+						<a href="">
+							<iconify-icon
+								icon="ph:user"
+								width="30"
+								height="30"
+								class="ml-4 hover:text-green-400"></iconify-icon>
+						</a>
+					</div>
 				</ul>
 			</div>
 		</div>

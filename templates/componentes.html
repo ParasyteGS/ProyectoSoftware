@@ -1,0 +1,32 @@
+{% extends "layout.html" %} {% block content %}
+
+<div class="m-20">
+	<div class="text-white font-K2D text-3xl text-left font-semibold mb-10">
+		<h1>Componentes</h1>
+	</div>
+	<div class="grid gap-10 grid-cols-[repeat(auto-fit,minmax(18rem,1fr))]">
+		<div>
+			<div class="card w-96 bg-base-100 rounded-lg">
+				<div class="flex items-center justify-center bg-neutral-800">
+					<figure class="w-[400px] h-[200px]">
+						<div class="h-full w-full">
+							<img
+								src="../static/img/Gps.jpg"
+								alt="Shoes"
+								class="w-full h-full object-cover" />
+						</div>
+					</figure>
+				</div>
+				<div class="card-body">
+					<h2 class="card-title">Shoes!</h2>
+					<p>If a dog chews shoes whose shoes does he choose?</p>
+					<div class="card-actions justify-end">
+						<button class="btn btn-primary">Buy Now</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{%endblock%}
