@@ -1,63 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0" />
-		<link
-			rel="stylesheet"
-			href="../static/css/output.css" />
-		<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
-		<title>{%block title%}{%endblock%}</title>
-	</head>
-	<body class="bg-black h-screen">
-		<div class="navbar bg-base-100 border-b-2 border-neutral-800 font-K2D">
-			<div class="flex-1">
-				<a
-					href="/"
-					class="btn btn-ghost rounded-md normal-case text-xl">
-					<span class="">Elec<span class="text-green-400">Trade</span></span>
-				</a>
-			</div>
-			<div>
-				<ul class="menu menu-horizontal justify-end items-center">
-					<li>
-						<a
-							href="/componentes"
-							class="rounded-md hover:text-green-400"
-							>Componentes</a
-						>
-					</li>
-					<li>
-						<a
-							href="/servicios"
-							class="rounded-md hover:text-green-400"
-							>Servicios</a
-						>
-					</li>
-					<div class="rounded-md">
-						<div class="form-control">
-							<input
-								type="text"
-								placeholder="Search"
-								class="input input-ghost input-sm rounded-md border-2 border-neutral-700 w-80" />
-						</div>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../static/css/output.css" />
+	<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+	<title>{%block title%}{%endblock%}</title>
+</head>
+
+<body class="bg-black h-screen text-white">
+	<div class="navbar bg-base-100 border-b-2 border-neutral-800 font-K2D">
+		<div class="flex-1">
+			<a href="/" class="btn btn-ghost rounded-md normal-case text-xl">
+				<span class="">Elec<span class="text-green-400">Trade</span></span>
+			</a>
+		</div>
+		<div>
+			<ul class="menu menu-horizontal justify-end items-center">
+				<li>
+					<a href="/componentes" class="rounded-md hover:text-green-400">Componentes</a>
+				</li>
+				<li>
+					<a href="/servicios" class="rounded-md hover:text-green-400">Servicios</a>
+				</li>
+				<div class="rounded-md">
+					<div class="form-control">
+						<input type="text" placeholder="Search"
+							class="input input-ghost input-sm rounded-md border-2 border-neutral-700 w-80" />
 					</div>
-					<div>
-						<a href="">
-							<iconify-icon
-								icon="ph:user"
-								width="30"
-								height="30"
+				</div>
+				<div class="relative">
+					{%if 'logged_in' in session %}
+					{% if session['role'] == 'vendedor' %}
+					<a href="{{ url_for('profile')}}" class="block">
+						<iconify-icon icon="ph:user" width="30" height="30"
+							class="ml-4 hover:text-green-400"></iconify-icon>
+					</a>
+					{% else %}
+					<a href="{{ url_for('profile')}}" class="block">
+						<iconify-icon icon="ph:user" width="30" height="30"
+							class="ml-4 hover:text-green-400"></iconify-icon>
+						{% endif %}
+
+						{%else%}
+						<a href="{{url_for('login')}}" class="block">
+							<iconify-icon icon="ph:user" width="30" height="30"
 								class="ml-4 hover:text-green-400"></iconify-icon>
 						</a>
-					</div>
-				</ul>
-			</div>
+						{%endif%}
+				</div>
+			</ul>
 		</div>
+	</div>
 
-		{%block content%}{%endblock%}
-	</body>
+	{%block content%}{%endblock%}
+</body>
+
+
 </html>
