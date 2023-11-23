@@ -1,9 +1,90 @@
-{% extends "layout.html" %}
-{%block title%}ElecTrade - {{ username }}{%endblock%}
-{% block content %}
+{% extends "layout.html" %} {%block title%}ElecTrade - {{ username
+}}{%endblock%} {% block content %}
 
 <div class="h-full">
-    <div class="flex items-center justify-center"></div>
+	<div class="flex mt-20 items-center justify-center space-x-5">
+		<div
+			id="sourceDiv"
+			class="bg-neutral-800 rounded-md p-10">
+			<h1 class="font-medium text-3xl">Perfil</h1>
+			<div class="flex items-center justify-center space-x-5">
+				<div class="h-60 w-60 mt-5">
+					<img
+						src="../static/img/Gps.jpg"
+						class="w-full h-full rounded-md border-green-500 border-4" />
+				</div>
+				<div class="text-xl space-y-2">
+					<p>{{username}}</p>
+					<p>{{role}}</p>
+					<p>Usuario hace {{ time_elapsed }}</p>
+				</div>
+			</div>
+			<div class="mt-10">
+				<a
+					href=""
+					class="text-green-500 font-medium text-xl"
+					>Editar perfil</a
+				>
+			</div>
+		</div>
+		<div class="targetDiv bg-neutral-800 rounded-md p-10"></div>
+	</div>
+	<div class="flex mt-10 items-center justify-center space-x-5 ml-5">
+		<div class="targetDiv bg-neutral-800 rounded-md p-10">
+			<h1 class="font-medium text-3xl">Publicaciones</h1>
+			<a href="">
+				<div class="flex items-center justify-center h-full">
+					<div class="text-center">
+						<p class="font-bold text-7xl">1400</p>
+						<p class="font-medium text-xl">Publicaciones</p>
+					</div>
+					<div>
+						<iconify-icon
+							icon="material-symbols:lab-profile-outline"
+							width="80"
+							height="80"
+							class="text-green-400"></iconify-icon>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="targetDiv bg-neutral-800 rounded-md p-10">
+			<h1 class="font-medium text-3xl">Ventas</h1>
+			<a href="">
+				<div class="flex items-center justify-center h-full">
+					<div class="text-center">
+						<p class="font-bold text-7xl">500</p>
+						<p class="font-medium text-xl">Ventas</p>
+					</div>
+					<div>
+						<iconify-icon
+							icon="ic:baseline-show-chart"
+							width="80"
+							height="80"
+							class="text-green-400"></iconify-icon>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
 </div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		// Obtén el div original por su ID
+		var miDiv = document.getElementById("sourceDiv");
+
+		// Obtén las dimensiones del div original
+		var width = miDiv.offsetWidth;
+		var height = miDiv.offsetHeight;
+
+		// Aplica las dimensiones a otros divs
+		var otrosDivs = document.querySelectorAll(".targetDiv");
+		otrosDivs.forEach(function (div) {
+			div.style.width = width + "px";
+			div.style.height = height + "px";
+		});
+	});
+</script>
 
 {%endblock%}

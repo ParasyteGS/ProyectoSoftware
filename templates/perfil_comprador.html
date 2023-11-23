@@ -1,49 +1,62 @@
-{% extends "layout.html" %}
-{%block title%}ElecTrade - {{username}}{%endblock%}
+{% extends "layout.html" %} {%block title%}ElecTrade - {{username}}{%endblock%}
 {% block content %}
 
 <div class="h-full">
-    <div class="flex items-center justify-center space-x-8">
-        <div class="bg-neutral-800 rounded-md mt-20 p-10 ">
-            <div class="flex">
-                <div>
-                    <div class="pb-3 mb-4">
-                        <h1 class="text-4xl font-medium ">Perfil</h1>
-                    </div>
-                    <div class="flex items-center justify-center space-x-5">
-                        <div class="h-60 w-60">
-                            <img src="../static/img/Gps.jpg" class="w-full h-full rounded-lg border-green-500 border-2">
-                        </div>
-                        <div class="text-xl space-y-2">
-                            <p>{{username}}</p>
-                            <p>{{role}}</p>
-                            <p>Usuario hace {{ time_elapsed }}</p>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <a href="" class="font-medium text-green-500 text-xl hover:text-green-400">Editar perfil</a>
-                    </div>
-                </div>
-                <div class="border-r-neutral-500 border-r-2  mx-20"></div>
-                <div class="flex items-center">
-                    <div>
-                        <h1 class="font-medium text-2xl">Deseas ser un vendedor?</h1>
-                        <div class="flex items-center justify-center mt-5">
-                            <a href="/vendedor_registro"
-                                class="btn rounded-md hover:text-white hover:bg-green-500 hover:border-none font-medium text-xl h-20 w-40 ">
-                                Vendedor
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-20">
-                <a href="" class="btn w-1/4 rounded-md">Mis pedidos</a>
-                <a href="" class="btn w-1/4 rounded-md">Métodos de pago</a>
-            </div>
-        </div>
-
-    </div>
+	<div class="flex items-center justify-center space-x-8">
+		<div class="bg-neutral-800 rounded-md mt-20 p-10">
+			<div class="flex">
+				<div>
+					<div class="pb-3 mb-4">
+						<h1 class="text-4xl font-medium">Perfil</h1>
+					</div>
+					<div class="flex items-center justify-center space-x-5">
+						<div class="h-60 w-60">
+							<img
+								src="../static/img/Gps.jpg"
+								class="w-full h-full rounded-lg border-green-500 border-2" />
+						</div>
+						<div class="text-xl space-y-2">
+							<p>{{username}}</p>
+							<p>{{role}}</p>
+							<p>Usuario hace {{ time_elapsed }}</p>
+						</div>
+					</div>
+					<div class="mt-4">
+						<a
+							href=""
+							class="font-medium text-green-500 text-xl hover:text-green-400"
+							>Editar perfil</a
+						>
+					</div>
+				</div>
+				<div class="border-r-neutral-500 border-r-2 mx-20"></div>
+				<div class="flex items-center">
+					<div>
+						<h1 class="font-medium text-2xl">Deseas ser un vendedor?</h1>
+						<div class="flex items-center justify-center mt-5">
+							<a
+								href="{{ url_for('procesar_formulario') }}"
+								class="btn rounded-md hover:text-white hover:bg-green-500 hover:border-none font-medium text-xl h-20 w-40">
+								Vendedor
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mt-20">
+				<a
+					href=""
+					class="btn w-1/4 rounded-md"
+					>Mis pedidos</a
+				>
+				<a
+					href=""
+					class="btn w-1/4 rounded-md"
+					>Métodos de pago</a
+				>
+			</div>
+		</div>
+	</div>
 </div>
 
 {%endblock%}

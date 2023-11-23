@@ -6,7 +6,8 @@ from pymongo import MongoClient
 from bson import ObjectId
 from flask_bcrypt import Bcrypt
 from datetime import datetime
-
+from bson import DBRef
+    
 
 
 load_dotenv()
@@ -92,7 +93,7 @@ def logout():
 
 
 # Perfiles
-@app.route('/profile')
+@app.route('/profile', methods=['POST', 'GET'])
 def profile():
         if 'logged_in' in session:
             user = user_collection.find_one({'username': session['username']})
@@ -135,9 +136,10 @@ def procesar_formulario():
     if request.method == 'POST':
 
         document_type = request.form.get('document_type')
+        celular = request.form.get('celular')
         dni = request.form.get('DNI')
         ruc = request.form.get('RUC')
-        company = request.form.get('company')
+        company = request.form.get('Company')
         
         username = session['username']
 
@@ -146,7 +148,7 @@ def procesar_formulario():
             if document_type == 'dni':
                 update_data = {
                     '$set': {
-                    
+                        'celular': celular,
                         'document_type': document_type,
                         'dni': dni,
                         'role': 'Vendedor'
@@ -155,6 +157,7 @@ def procesar_formulario():
             else:
                 update_data = {
                     '$set': {
+                        'celular': celular,
                         'document_type': document_type,
                         'ruc': ruc,
                         'company': company,
