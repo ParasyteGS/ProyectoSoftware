@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import os
 from dotenv import load_dotenv
 from pymongo import MongoClient
-from pymongo import MongoClient
 from bson import ObjectId
 from flask_bcrypt import Bcrypt
 from datetime import datetime
@@ -122,6 +121,25 @@ def profile():
         else:
             flash('Inicia sesión para ver tu perfil')
             return redirect(url_for('login'))
+
+# Editar perfil
+@app.route('/editar_perfil', methods=['POST', 'GET'])
+def editar_perfil():
+    if 'logged_in' in session:
+        user = user_collection.find_one({'username': session['username']})
+        name = user.get('name')
+        username = user.get('username')
+        email = user.get('email')
+        celular = user.get('celular')
+        document_type = user.get('document_type')
+        if document_type == 'dni':
+            document = user.get('dni')
+        else:
+            document = user.get('ruc')
+            company = user.get('company')
+            
+        return render_template('editar_perfil.html', username=username, name=name, email=email, celular=celular, document_type=document_type, document=document,  company=company, )
+
 
 # Registro para vendedores
 @app.route('/vendedor'  , methods=['POST', 'GET'])  
