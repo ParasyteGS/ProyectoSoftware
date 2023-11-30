@@ -1,0 +1,106 @@
+{% extends "layout.html" %} {%block title%}ElecTrade - Añadir
+Producto{%endblock%} {% block content %}
+
+<div class="h-full">
+	<div class="flex items-center justify-center my-20">
+		<div class="bg-neutral-800 rounded-md p-10">
+			<div>
+				<h1 class="font-medium text-xl mb-4">Agregar Componente</h1>
+
+				<form
+					action="/agregar_componente"
+					method="post"
+					enctype="multipart/form-data">
+					<!-- Nombre del componente -->
+					<h1
+						for="nombre"
+						class="font-medium text-xl mb-2">
+						Nombre:
+					</h1>
+					<input
+						type="text"
+						id="nombre"
+						name="nombre"
+						class="input rounded-md mb-2"
+						required />
+
+					<!-- Imagen del componente -->
+					<h1
+						for="imagen"
+						class="font-medium text-xl mb-4">
+						Imagen:
+					</h1>
+					<input
+						type="file"
+						id="imagen"
+						name="imagen"
+						accept="image/*"
+						class="file mb-4"
+						required />
+
+					<!-- Descripción del componente -->
+					<h1
+						for="descripcion"
+						class="font-medium text-xl mb-2">
+						Descripción:
+					</h1>
+					<textarea
+						id="descripcion"
+						name="descripcion"
+						class="textarea rounded-md w-full h-40"
+						required></textarea>
+
+					<!-- Precio del componente -->
+					<h1
+						for="precio"
+						class="font-medium text-xl mb-2">
+						Precio:
+					</h1>
+					<input
+						type="number"
+						id="precio"
+						name="precio"
+						step="0.01"
+						class="input rounded-md"
+						required />
+
+					<!-- Stock del componente -->
+					<h1
+						for="stock"
+						class="font-medium text-xl mb-2">
+						Stock:
+					</h1>
+					<input
+						type="number"
+						id="stock"
+						name="stock"
+						step="0.01"
+						class="input rounded-md"
+						required />
+
+					<h1
+						for="condicion"
+						class="font-medium text-xl mb-2">
+						Condición del componente:
+					</h1>
+					<select
+						id="condicion"
+						name="condicion">
+						<option value="nuevo">Nuevo</option>
+						<option value="usado">Usado</option>
+					</select>
+					<!-- Botón para enviar el formulario -->
+					<div class="mt-5 flex items-center justify-center">
+						<button
+							type="submit"
+							class="btn rounded-md hover:bg-green-500">
+							Agregar Componente
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{%endblock%}

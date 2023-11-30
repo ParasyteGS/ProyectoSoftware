@@ -3,11 +3,15 @@
 
 <div class="h-full">
 	<div class="flex mt-20 items-center justify-center space-x-5">
-		<div id="sourceDiv" class="bg-neutral-800 rounded-md p-10">
+		<div
+			id="sourceDiv"
+			class="bg-neutral-800 rounded-md p-10">
 			<h1 class="font-medium text-3xl">Perfil</h1>
 			<div class="flex items-center justify-center space-x-5">
 				<div class="h-60 w-60 mt-5">
-					<img src="../static/img/Gps.jpg" class="w-full h-full rounded-md border-green-500 border-4" />
+					<img
+						src="../static/img/Gps.jpg"
+						class="w-full h-full rounded-md border-green-500 border-4" />
 				</div>
 				<div class="text-xl space-y-2">
 					<p>{{username}}</p>
@@ -16,12 +20,33 @@
 				</div>
 			</div>
 			<div class="mt-10">
-				<a href="/editar_perfil" class="text-green-500 font-medium text-xl">Editar perfil</a>
+				<a
+					href="/editar_perfil"
+					class="text-green-500 font-medium text-xl"
+					>Editar perfil</a
+				>
 			</div>
 		</div>
-		<div class="targetDiv bg-neutral-800 rounded-md p-10"></div>
+		<div class="targetDiv bg-neutral-800 rounded-md p-10">
+			<div class="flex items-center justify-center h-full">
+				<div class="text-center">
+					<a href="/agregar_componente">
+						<div
+							class="btn rounded-md text-xl text-white font-medium hover:bg-green-500 h-20 w-60 mb-4">
+							Agregar Componente
+						</div>
+					</a>
+					<a href="/agregar_servicio">
+						<div
+							class="btn rounded-md text-xl text-white font-medium hover:bg-green-500 h-20 w-60">
+							Agregar Servicio
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="flex mt-10 items-center justify-center space-x-5 ">
+	<div class="flex mt-10 items-center justify-center space-x-5">
 		<div class="targetDiv bg-neutral-800 rounded-md p-10">
 			<h1 class="font-medium text-3xl">Publicaciones</h1>
 			<a href="">
@@ -31,7 +56,10 @@
 						<p class="font-medium text-xl">Publicaciones</p>
 					</div>
 					<div>
-						<iconify-icon icon="material-symbols:lab-profile-outline" width="80" height="80"
+						<iconify-icon
+							icon="material-symbols:lab-profile-outline"
+							width="80"
+							height="80"
 							class="text-green-400"></iconify-icon>
 					</div>
 				</div>
@@ -46,7 +74,10 @@
 						<p class="font-medium text-xl">Ventas</p>
 					</div>
 					<div>
-						<iconify-icon icon="ic:baseline-show-chart" width="80" height="80"
+						<iconify-icon
+							icon="ic:baseline-show-chart"
+							width="80"
+							height="80"
 							class="text-green-400"></iconify-icon>
 					</div>
 				</div>

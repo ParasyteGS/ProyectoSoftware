@@ -1,0 +1,108 @@
+{% extends "layout.html" %} {% block title %}ElecTrade - {{ componente_id }}{%
+endblock %} {% block content %}
+
+<div class="h-full">
+	<div class="flex items-center justify-center my-20">
+		<div class="bg-neutral-800 h-full p-10 rounded-md">
+			<div class="flex justify-center items-center w-[1300px]">
+				<div class="border rounded-xl h-80 w-3/5 p-5">
+					<img
+						src="data:image/png;base64,{{ componente.imagen }}"
+						alt="Imagen del componente" />
+				</div>
+				<div class="ml-5 border rounded-xl p-5 w-2/5">
+					<div>
+						<p class="font-light my-2">{{componente.condicion}}</p>
+
+						<h1 class="text-3xl font-medium">{{componente.nombre}}</h1>
+					</div>
+
+					<div class="my-5">
+						<h1 class="text-3xl font-light">S/ {{componente.precio}}</h1>
+						<a href=""
+							><p class="text-green-500 font-light">Ver métodos de pago</p></a
+						>
+					</div>
+					<div class="my-5">
+						<h1 class="font-light">Envíos a todo el país</h1>
+						<a href="">
+							<h1 class="font-light text-green-500">Métodos de envío</h1>
+						</a>
+					</div>
+					<div class="mb-5">
+						<a href="">
+							<div
+								class="btn rounded-md flex items-center border text-xl h-14 border-white hover:bg-green-500">
+								Comprar ahora
+							</div>
+						</a>
+					</div>
+
+					<!-- Botón para activar el formulario de edición -->
+					{% if es_vendedor %}
+					<button
+						id="editButton"
+						onclick="toggleEditForm()"
+						class="hover:text-green-500">
+						<iconify-icon
+							icon="material-symbols:edit"
+							width="30"
+							height="30"
+							class="text-green-400"></iconify-icon>
+					</button>
+					{% endif %}
+				</div>
+			</div>
+			<div class="mt-5 flex justify-center items-center w-[1300px]">
+				<div class="w-3/5 p-5">
+					<h1>Descripción</h1>
+					<p>{{componente.descripcion}}</p>
+				</div>
+				<div class="w-2/5 border rounded-xl p-5 ml-5">
+					<h1 class="text-xl font-medium">Acerca del vendedor</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Formulario de edición (inicialmente oculto) -->
+	<div
+		id="editForm"
+		class="hidden bg-neutral-800 fixed top-0 left-0 w-full h-full items-center justify-center">
+		<div class="bg-black bg-opacity-50 rounded-md p-10">
+			<form
+				method="post"
+				action="{{ url_for('editar_componente', componente_id=componente_id) }}">
+				<!-- Campos de edición -->
+				<label
+					for="nuevo_nombre"
+					class="font-medium text-xl"
+					>Nuevo Nombre:</label
+				>
+				<input
+					type="text"
+					id="nuevo_nombre"
+					name="nuevo_nombre"
+					value="{{ componente.nombre }}"
+					class="input rounded-md" />
+
+				<!-- Agrega más campos según tus necesidades -->
+
+				<button
+					type="submit"
+					class="btn rounded-md hover:text-green-500">
+					Guardar Cambios
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+	function toggleEditForm() {
+		var form = document.getElementById("editForm");
+		form.classList.toggle("hidden");
+	}
+</script>
+
+{% endblock %}

@@ -1,116 +1,201 @@
-{% extends "layout.html" %}
-{% block title %}
-ElecTrade - Editar perfil
-{% endblock %}
-{% block content %}
+{% extends "layout.html" %} {% block title %} ElecTrade - Editar perfil {%
+endblock %} {% block content %}
 <div class="h-full">
-    <div class=" flex items-center justify-center space-x-6">
-        <div class="bg-neutral-800 rounded-md my-20 p-10">
-            <div class="flex items-center space-x-3">
-                <h1 class="text-4xl font-medium">Edita tu perfil</h1>
-                <button id="editButton" onclick="toggleForm()" class="text-green-500">
-                    <iconify-icon icon="material-symbols:edit-outline" widht="40" height="40"
-                        class="text-green-500"></iconify-icon>
-                </button>
-            </div>
+	<div class="flex items-center justify-center space-x-6">
+		<div class="bg-neutral-800 rounded-md my-20 p-10">
+			<div class="flex items-center space-x-3">
+				<h1 class="text-4xl font-medium">Edita tu perfil</h1>
+				<button
+					id="editButton"
+					onclick="toggleForm()"
+					class="text-green-500">
+					<iconify-icon
+						icon="material-symbols:edit-outline"
+						widht="40"
+						height="40"
+						class="text-green-500"></iconify-icon>
+				</button>
+			</div>
 
+			<div
+				id="editForm"
+				class="bg-black bg-opacity-50 fixed top-0 left-0 w-full h-full flex items-center justify-center">
+				<div class="bg-neutral-800 rounded-md p-10">
+					<form
+						method="post"
+						action="{{ url_for('editar_perfil') }}">
+						<!-- Agrega los campos de edición necesarios -->
+						<div class="flex space-x-5">
+							<div class="space-y-3">
+								<h1
+									for="new_name"
+									class="font-medium text-xl">
+									Nuevo Nombre:
+								</h1>
+								<input
+									type="text"
+									id="new_name"
+									name="new_name"
+									value="{{ name }}"
+									class="input rounded-md" />
+								<h1
+									for="new_email"
+									class="font-medium text-xl">
+									Nuevo Correo:
+								</h1>
+								<input
+									type="email"
+									id="new_email"
+									name="new_email"
+									value="{{ email }}"
+									class="input rounded-md" />
+								<h1
+									for="new_celular"
+									class="font-medium text-xl">
+									Nuevo Celular:
+								</h1>
+								<input
+									type="text"
+									id="new_celular"
+									name="new_celular"
+									value="{{ celular }}"
+									class="input rounded-md" />
+							</div>
+							<div class="space-y-3">
+								<h1
+									for="new_username"
+									class="font-medium text-xl">
+									Nuevo Usuario:
+								</h1>
+								<input
+									type="text"
+									id="new_username"
+									name="new_username"
+									value="{{ username }}"
+									class="input rounded-md" />
+								{% if document_type != 'dni' %}
+								<h1
+									for="new_ruc"
+									class="font-medium text-xl">
+									Nuevo RUC:
+								</h1>
+								<input
+									type="text"
+									id="new_ruc"
+									name="new_ruc"
+									value="{{ document }}"
+									class="input rounded-md" />
+								<h1
+									for="new_company"
+									class="font-medium text-xl">
+									Nueva Compañía:
+								</h1>
+								<input
+									type="text"
+									id="new_company"
+									name="new_company"
+									value="{{ company }}"
+									class="input rounded-md" />
+								{% else %}
+								<h1
+									for="new_dni"
+									class="font-medium text-xl">
+									Nuevo DNI:
+								</h1>
+								<input
+									type="text"
+									id="new_dni"
+									name="new_dni"
+									value="{{ document }}"
+									class="input rounded-md" />
+								{% endif %}
+							</div>
+						</div>
+						<div class="text-center mt-5 space-y-4">
+							<div>
+								<button
+									type="submit"
+									value="Guardar cambios"
+									class="btn rounded-md hover:text-green-500">
+									Guardar cambios
+								</button>
+							</div>
+							<div>
+								<button
+									type="button"
+									onclick="toggleForm()"
+									class="btn rounded-md hover:text-green-500">
+									Cancelar
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
 
-            <div id="editForm"
-                class=" bg-black bg-opacity-50 fixed top-0 left-0 w-full h-full flex items-center justify-center">
-                <div class="bg-neutral-800  rounded-md p-10  ">
-                    <form method="post" action="{{ url_for('editar_perfil') }}">
-                        <!-- Agrega los campos de edición necesarios -->
-                        <div class=" flex space-x-5">
-                            <div class="space-y-3">
-                                <h1 for="new_name" class="font-medium text-xl">Nuevo Nombre:</h1>
-                                <input type="text" id="new_name" name="new_name" value="{{ name }}"
-                                    class="input rounded-md">
-                                <h1 for="new_email" class="font-medium text-xl">Nuevo Correo:</h1>
-                                <input type="email" id="new_email" name="new_email" value="{{ email }}"
-                                    class="input rounded-md">
-                                <h1 for="new_celular" class="font-medium text-xl">Nuevo Celular:</h1>
-                                <input type="text" id="new_celular" name="new_celular" value="{{ celular }}"
-                                    class="input rounded-md">
-                            </div>
-                            <div class="space-y-3">
-                                <h1 for="new_username" class="font-medium text-xl">Nuevo Usuario:</h1>
-                                <input type="text" id="new_username" name="new_username" value="{{ username }}"
-                                    class="input rounded-md">
-                                <h1 for="new_ruc" class="font-medium text-xl">Nuevo RUC:</h1>
-                                <input type="text" id="new_ruc" name="new_ruc" value="{{ document }}"
-                                    class="input rounded-md">
-                                <h1 for="new_company" class="font-medium text-xl">Nueva Compañía:</h1>
-                                <input type="text" id="new_company" name="new_company" value="{{ company }}"
-                                    class="input rounded-md">
-                            </div>
+			<div class="flex space-x-5 mt-5">
+				<div class="text-xl font-medium space-y-4">
+					<p>Nombre</p>
+					<p>Usuario</p>
+					<p>Correo</p>
+					<p>Celular</p>
+					{% if document_type == dni %}
 
-                        </div>
-                        <div class="text-center mt-5 space-y-4">
-                            <div><button type="submit" value="Guardar cambios"
-                                    class="btn rounded-md hover:text-green-500">Guardar
-                                    cambios</button></div>
-                            <div><button type="button" onclick="toggleForm()"
-                                    class="btn rounded-md hover:text-green-500">Cancelar</button></div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+					<p>DNI</p>
 
-            <div class="flex space-x-5 mt-5">
-                <div class="text-xl font-medium space-y-4">
-                    <p>Nombre</p>
-                    <p>Usuario</p>
-                    <p>Correo</p>
-                    <p>Celular</p>
-                    {% if document_type == dni %}
+					{% else %}
 
-                    <p>DNI</p>
+					<p>RUC</p>
+					<p>Compañía</p>
 
-                    {% else %}
-
-                    <p>RUC</p>
-                    <p>Compañía</p>
-
-                    {% endif %}
-                    <p>Contraseña</p>
-
-
-                </div>
-                <div class="text-xl font-medium space-y-4">
-                    <p>{{name}}</p>
-                    <p>{{username}}</p>
-                    <p>{{email}}</p>
-                    <p>{{celular}}</p>
-                    {% if document_type == dni %}
-                    <p>{{document}}</p>
-                    {% else %}
-                    <p>{{document}}</p>
-                    <p>{{company}}</p>
-                    {% endif %}
-                    <p class="text-green-500">*********</p>
-
-                </div>
-            </div>
-        </div>
-        <div class=" my-20 p-10">
-            <div class="h-80 w-80 mt-5 flex items-center        ">
-                {% if imagen %}
-                <img src="{{ imagen }}" class="w-full h-full rounded-md border-green-500 border-4" />
-                {% else %}
-                <!-- Aquí puedes poner el código o el enlace del icono predeterminado -->
-                <iconify-icon icon="material-symbols:person" width="300" height="300"
-                    class="text-green-500"></iconify-icon>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+					{% endif %}
+					<p>Contraseña</p>
+				</div>
+				<div class="text-xl font-medium space-y-4">
+					<p>{{name}}</p>
+					<p>{{username}}</p>
+					<p>{{email}}</p>
+					<p>{{celular}}</p>
+					{% if document_type == dni %}
+					<p>{{document}}</p>
+					{% else %}
+					<p>{{document}}</p>
+					<p>{{company}}</p>
+					{% endif %}
+					<p class="text-green-500">*********</p>
+				</div>
+			</div>
+		</div>
+		<div class="my-20 p-10">
+			<div class="h-80 w-80 mt-5 flex items-center">
+				{% if imagen %}
+				<img
+					src="{{ imagen }}"
+					class="w-full h-full rounded-md border-green-500 border-4" />
+				{% else %}
+				<!-- Aquí puedes poner el código o el enlace del icono predeterminado -->
+				<iconify-icon
+					icon="material-symbols:person"
+					width="300"
+					height="300"
+					class="text-green-500"></iconify-icon>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </div>
 
 <script>
-    function toggleForm() {
-        var form = document.getElementById('editForm');
-        form.classList.toggle('hidden');
-    }
+	function toggleForm() {
+		var form = document.getElementById("editForm");
+		form.classList.toggle("hidden");
+	}
+
+	// Agrega esta función para prevenir la ejecución automática al cargar la página
+	document.addEventListener("DOMContentLoaded", function () {
+		var form = document.getElementById("editForm");
+		form.classList.add("hidden");
+	});
 </script>
 
 {% endblock %}
