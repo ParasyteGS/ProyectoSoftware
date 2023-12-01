@@ -1,0 +1,40 @@
+{% extends "layout.html" %} {% block title %}ElecTrade - Carrito{%
+endblock %} {% block content %}
+
+
+
+<div class="h-full">
+    <div class="flex items-center justify-center my-20">
+        <div class="bg-neutral-800 p-6 rounded-md w-1/2">
+            <h1 class="text-3xl font-medium">Mis Pedidos</h1>
+
+            {% if componentes_info %}
+
+            {% for componente_info in componentes_info %}
+
+            <div
+                class="my-5 flex justify-between items-center border-2 p-4 rounded-md hover:border-neutral-700 border-neutral-800">
+                <div>
+                    <p class="font-medium text-lg"> {{ componente_info['nombre'] }}
+                    </p>
+                    <p>S/ {{ componente_info['precio'] }}</p>
+                    <p>Comprado el {{ componente_info['fecha_compra'].strftime('%d de %B ') }}</p>
+                    <p class="text-green-500">Llega el {{ componente_info['fecha_estimada_envio'].strftime('%d de %B ')
+                        }}</p>
+                </div>
+                <div class="w-40 h-40">
+                    <img src="{{componente_info['image']}}" alt=""
+                        class="w-full h-full rounded-md border-2 border-green-500">
+                </div>
+            </div>
+
+            {% endfor %}
+
+            {% else %}
+            <p>No tienes pedidos aún.</p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}ElecTrade - Contacto{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-10 text-white">
+    <h1 class="text-3xl font-bold mb-5">Contacto</h1>
+
+    <p class="mb-5">¡Nos encantaría saber de ti! Por favor, completa el formulario de contacto a continuación:</p>
+
+    <form action="{{ url_for('enviar_mensaje') }}" method="post" class="max-w-md">
+        <!-- Agrega aquí los campos del formulario -->
+        <div class="mb-4">
+            <label for="nombre" class="block text-sm font-medium ">Nombre</label>
+            <input type="text" id="nombre" name="nombre" class="input mt-1 p-2 w-full border border-white rounded-md"
+                required>
+        </div>
+
+        <div class="mb-4">
+            <label for="email" class="block text-sm font-medium ">Correo Electrónico</label>
+            <input type="email" id="email" name="email" class=" input mt-1 p-2 w-full border border-white rounded-md"
+                required>
+        </div>
+
+        <div class="mb-4">
+            <label for="mensaje" class="block text-sm font-medium ">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="4"
+                class="textarea mt-1 p-2 w-full border border-white rounded-md" required></textarea>
+        </div>
+
+        <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">Enviar
+            Mensaje</button>
+    </form>
+</div>
+{% endblock %}

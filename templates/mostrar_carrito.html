@@ -1,0 +1,146 @@
+{% extends "layout.html" %} {% block title %}ElecTrade - Carrito{%
+endblock %} {% block content %}
+<div class="h-full w-full">
+    <div class="flex items-center justify-center">
+
+        <div class="my-20 ">
+
+            <div class="flex w-[1400px] space-x-6">
+                <div class="bg-neutral-800 rounded-md h-max w-3/5 p-6 space-y-3">
+                    <h1 class="text-xl font-medium">Nombre</h1>
+                    <p class="font-light">{{user['name']}} </p>
+                    <h1 class="text-xl font-medium">Email</h1>
+                    <p class="font-light">{{user['email']}} </p>
+                    <h1 class="text-xl font-medium">Dirección</h1>
+                    <p class="font-light">{{user['address']}} </p>
+                    {% if user['direccion'] == 'No registrada' %}
+                    <div>
+                        <div>
+                            <button id="editButton" onclick="toggleForm()">
+                                <div class="flex items-center hover:text-green-400 space-x">
+                                    <iconify-icon icon="material-symbols:add" width="20" height="20"
+                                        class=" "></iconify-icon>
+                                    <p>Agregar Dirección</p>
+                                </div>
+                            </button>
+                        </div>
+                        <div id="editForm"
+                            class="bg-black bg-opacity-50 fixed top-0 left-0 w-full h-full flex items-center justify-center">
+                            <div class="bg-neutral-800 rounded-md p-10">
+                                <form method="post" action="{{ url_for('agregar_direccion') }}">
+                                    <!-- Agrega los campos de edición necesarios -->
+                                    <div class="flex space-x-5">
+                                        <div class="space-y-3">
+                                            <h1 for="direccion" class="font-medium text-xl">
+                                                Direccion:
+                                            </h1>
+                                            <input type="text" id="direccion" name="direccion" value="{{ direccion }}"
+                                                class="input rounded-md" />
+                                            <h1 for="celular" class="font-medium text-xl">
+                                                Celular:
+                                            </h1>
+                                            <input type="text" id="celular" name="celular" value="{{ celular }}"
+                                                class="input rounded-md" />
+                                        </div>
+                                    </div>
+                                    <div class="text-center mt-5 space-y-4">
+                                        <div>
+                                            <button type="submit" value="Guardar cambios"
+                                                class="btn rounded-md hover:text-green-500">
+                                                Guardar cambios
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button type="button" onclick="toggleForm()"
+                                                class="btn rounded-md hover:text-green-500">
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    {% else %}
+                    <div class="space-y-3">
+                        <p>{{user['direccion']}} </p>
+                        <h1 class="text-xl font-medium">Celular</h1>
+                        <p>{{user['celular']}} </p>
+                    </div>
+                    {% endif %}
+
+                </div>
+                <div class="bg-neutral-800 rounded-md w-2/5 p-6">
+                    <h1 class="text-xl font-medium">Productos en el carrito</h1>
+                    <div class="mt-4 flex justify-between ">
+                        <div>
+                            <p class="text-lg font-light">Precio</p>
+                            <p class="text-lg font-light">Envío</p>
+                            <p class="text-lg font-light">Orden Total</p>
+                        </div>
+                        <div>
+                            <p class="text-lg font-light">S/ {{total_precio}} </p>
+                            <p class="text-lg font-light">S/ {{envio}}</p>
+                            <p class="text-lg font-light">S/ {{total_precio + envio}}
+
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        {% if componentes_carrito %}
+                        {% for item in componentes_carrito %}
+                        <div>
+                            <div class="flex justify-between mt-4 bg-neutral-900 p-6 rounded-md">
+                                <div class="w-[300px] h-20">
+                                    <h2 class="text-lg font-medium">{{ item.componente.nombre }}</h2>
+                                    <p class="text-lg font-light">S/ {{ item.componente.precio }}</p>
+                                    <a href="{{ url_for('eliminar_carrito', componente_id=item.componente._id) }}">
+                                        <div class="flex mt-5 items-center hover:text-red-500">
+                                            <iconify-icon icon="mdi:close" width="25" height="25"
+                                                class=""></iconify-icon>
+                                            <p>Eliminar del carrito</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="w-32 h-32">
+                                    <img src="{{item.componente.image}}" alt="" class="rounded-md w-full h-full">
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="flex items-center justify-center mt-5">
+                            <!-- Inside your "mostrar_carrito.html" template -->
+                            <form action="{{ url_for('finalizar_compra') }}" method="post">
+                                <button type="submit" class="btn rounded-md hover:text-green-500">
+                                    Finalizar Compra
+                                </button>
+                            </form>
+
+                        </div>
+                        {% else %}
+                        <div class="flex items-center justify-center mt-10 ">
+                            <p class="text-2xl font-medium text-green-500">El carrito está vacío</p>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script>
+            function toggleForm() {
+                var form = document.getElementById("editForm");
+                form.classList.toggle("hidden");
+            }
+
+            // Agrega esta función para prevenir la ejecución automática al cargar la página
+            document.addEventListener("DOMContentLoaded", function () {
+                var form = document.getElementById("editForm");
+                form.classList.add("hidden");
+            });
+        </script>
+
+        {%endblock%}

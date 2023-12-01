@@ -5,28 +5,34 @@
 		<h1>Componentes</h1>
 	</div>
 	<div class="grid gap-10 grid-cols-[repeat(auto-fit,minmax(18rem,1fr))]">
-		<div>
-			<div class="card w-96 bg-base-100 rounded-lg">
-				<div class="flex items-center justify-center bg-neutral-800">
-					<figure class="w-[400px] h-[200px]">
-						<div class="h-full w-full">
-							<img
-								src="../static/img/Gps.jpg"
-								alt="Shoes"
-								class="w-full h-full object-cover" />
+		{% for componente in componentes %}
+		<div class="w-max">
+			<a href="{{ url_for('detalle_componente', componente_id=componente['_id']) }}">
+				<div class="card w-96 bg-neutral-900 rounded-lg">
+					<div class="flex items-center justify-center bg-neutral-800">
+						<figure class="w-[400px] h-[200px]">
+							<div class="h-full w-full">
+								<img src="{{ componente.image }}" alt="{{ componente.nombre }}"
+									class="w-full h-full object-cover rounded-md" />
+							</div>
+						</figure>
+					</div>
+					<div class="card-body">
+						<h2 class="card-title font-medium text-2xl">{{ componente.nombre }}</h2>
+						<div class="h-10">
+							<p class="truncate">{{ componente.descripcion }}</p>
 						</div>
-					</figure>
-				</div>
-				<div class="card-body">
-					<h2 class="card-title">Shoes!</h2>
-					<p>If a dog chews shoes whose shoes does he choose?</p>
-					<div class="card-actions justify-end">
-						<button class="btn btn-primary">Buy Now</button>
+						<p class="font-light text-2xl">S/ {{'{:,.2f}'.format(componente.precio)}}</p>
+						<p class="text-green-500 font-medium text-lg">{{componente.condicion}} </p>
+
+						<!-- Agrega más información según sea necesario -->
+
 					</div>
 				</div>
-			</div>
+			</a>
 		</div>
+		{% endfor %}
 	</div>
 </div>
 
-{%endblock%}
+{% endblock %}

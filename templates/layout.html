@@ -1,125 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0" />
-		<link
-			rel="stylesheet"
-			href="../static/css/output.css" />
-		<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
-		<title>{%block title%}{%endblock%}</title>
-	</head>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../static/css/output.css" />
+	<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-	<body class="bg-black text-white">
-		<div class="h-screen flex flex-col justify-between">
-			<div class="navbar bg-base-100 border-b-2 border-neutral-800 font-K2D">
-				<div class="flex-1">
-					<a
-						href="/"
-						class="btn btn-ghost rounded-md normal-case text-xl">
-						<span class="">Elec<span class="text-green-400">Trade</span></span>
-					</a>
-				</div>
-				<div>
-					<ul class="menu menu-horizontal justify-end items-center">
-						<li>
-							<a
-								href="/componentes"
-								class="rounded-md hover:text-green-400"
-								>Componentes</a
-							>
-						</li>
-						<li>
-							<a
-								href="/servicios"
-								class="rounded-md hover:text-green-400"
-								>Servicios</a
-							>
-						</li>
-						<div class="rounded-md">
-							<div class="form-control">
-								<input
-									type="text"
-									placeholder="Search"
-									class="input input-ghost input-sm rounded-md border-2 border-neutral-700 w-80" />
-							</div>
-						</div>
-						<div class="relative">
-							<a
-								href="{{ url_for('profile')}}"
-								class="block">
-								<iconify-icon
-									icon="ph:user"
-									width="30"
-									height="30"
-									class="ml-4 hover:text-green-400"></iconify-icon>
-							</a>
-						</div>
-					</ul>
-				</div>
+
+	<title>{%block title%}{%endblock%}</title>
+</head>
+
+<body class="bg-black text-white">
+	<div class="h-screen flex flex-col justify-between">
+		<div class="navbar bg-base-100 border-b-2 border-neutral-800 font-K2D">
+			<div class="flex-1">
+				<a href="/" class="btn btn-ghost rounded-md normal-case text-xl">
+					<span class="">Elec<span class="text-green-400">Trade</span></span>
+				</a>
 			</div>
-
-			<main class="mb-auto">{%block content%}{%endblock%}</main>
-
-			<footer
-				class="footer footer-center mt-10 p-10 bg-base-200 text-base-content rounded font-K2D">
-				<nav class="grid grid-flow-col gap-4">
-					<a
-						href="/nosotros"
-						class="link link-hover"
-						>Nosotros</a
-					>
-					<a
-						href="/contacto"
-						class="link link-hover"
-						>Contacto</a
-					>
-					<a
-						href="/garantia"
-						class="link link-hover"
-						>Garantía</a
-					>
-				</nav>
-				<nav>
-					<div class="grid grid-flow-col gap-4 text-green-400">
-						<a href="https://github.com/">
-							<iconify-icon
-								icon="jam:github"
-								width="30"
-								height="30"></iconify-icon>
-						</a>
-						<a href="https://www.instagram.com/">
-							<iconify-icon
-								icon="jam:instagram"
-								width="30"
-								height="30"></iconify-icon>
-						</a>
-						<a href="https://www.youtube.com/">
-							<iconify-icon
-								icon="akar-icons:youtube-fill"
-								width="30"
-								height="30"></iconify-icon>
+			<div>
+				<ul class="menu menu-horizontal justify-end items-center">
+					<li>
+						<a href="/componentes" class="rounded-md hover:text-green-400">Componentes</a>
+					</li>
+					<li>
+						<a href="/servicios" class="rounded-md hover:text-green-400">Servicios</a>
+					</li>
+					<div class="rounded-md">
+						<div class="form-control">
+							<input type="text" placeholder="Search"
+								class="input input-ghost input-sm rounded-md border-2 border-neutral-700 w-80" />
+						</div>
+					</div>
+					<div class="relative">
+						<a href="/mostrar_carrito" class="block">
+							<iconify-icon icon="material-symbols:shopping-cart" width="30" height="30"
+								class="ml-4 hover:text-green-400"></iconify-icon>
+							{% if session['carrito'] %}
+							<span
+								class="bg-green-500 text-white rounded-full px-2 py-1 absolute top-0 right-0 -mt-2 -mr-2">
+								{{ session['carrito'] | length }}
+							</span>
+							{% endif %}
 						</a>
 					</div>
-				</nav>
-				<aside>
-					<p>Copyright &copy; <span id="currentYear"></span> - ElecTrade</p>
-				</aside>
-			</footer>
+					<div class="relative">
+						<a href="{{ url_for('profile')}}" class="block">
+							<iconify-icon icon="ph:user" width="30" height="30"
+								class="ml-4 hover:text-green-400"></iconify-icon>
+						</a>
+					</div>
+				</ul>
+			</div>
 		</div>
-	</body>
 
-	<script>
-		// Obtiene el elemento span por su id
-		const currentYearSpan = document.getElementById("currentYear");
+		<main class="mb-auto">{%block content%}{%endblock%}</main>
 
-		// Obtiene el año actual
-		const currentYear = new Date().getFullYear();
+		<footer class="footer footer-center mt-10 p-10 bg-base-200 text-base-content rounded font-K2D">
+			<nav class="grid grid-flow-col gap-4">
+				<a href="/nosotros" class="link link-hover">Nosotros</a>
+				<a href="/contacto" class="link link-hover">Contacto</a>
+				<a href="/garantia" class="link link-hover">Garantía</a>
+			</nav>
+			<nav>
+				<div class="grid grid-flow-col gap-4 text-green-400">
+					<a href="https://github.com/">
+						<iconify-icon icon="jam:github" width="30" height="30"></iconify-icon>
+					</a>
+					<a href="https://www.instagram.com/">
+						<iconify-icon icon="jam:instagram" width="30" height="30"></iconify-icon>
+					</a>
+					<a href="https://www.youtube.com/">
+						<iconify-icon icon="akar-icons:youtube-fill" width="30" height="30"></iconify-icon>
+					</a>
+				</div>
+			</nav>
+			<aside>
+				<p>Copyright &copy; <span id="currentYear"></span> - ElecTrade</p>
+			</aside>
+		</footer>
+	</div>
 
-		// Asigna el año actual al contenido del span
-		currentYearSpan.textContent = currentYear;
-	</script>
+</body>
+
+
+<script>
+	// Obtiene el elemento span por su id
+	const currentYearSpan = document.getElementById("currentYear");
+
+	// Obtiene el año actual
+	const currentYear = new Date().getFullYear();
+
+	// Asigna el año actual al contenido del span
+	currentYearSpan.textContent = currentYear;
+</script>
+
 </html>

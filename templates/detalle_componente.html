@@ -1,108 +1,186 @@
-{% extends "layout.html" %} {% block title %}ElecTrade - {{ componente_id }}{%
+{% extends "layout.html" %} {% block title %}ElecTrade - {{ componente.nombre }}{%
 endblock %} {% block content %}
 
 <div class="h-full">
-	<div class="flex items-center justify-center my-20">
-		<div class="bg-neutral-800 h-full p-10 rounded-md">
-			<div class="flex justify-center items-center w-[1300px]">
-				<div class="border rounded-xl h-80 w-3/5 p-5">
-					<img
-						src="data:image/png;base64,{{ componente.imagen }}"
-						alt="Imagen del componente" />
+	<div class="flex items-center justify-center  my-20 ">
+		<div class="bg-neutral-800 rounded-md grid grid-cols-2 p-8 pt-10 gap-8  w-[1300px] h-full">
+			<div>
+				<div class="flex items-center justify-center mb-6">
+					<div class="w-[400px] h-[400px]">
+						<img src="../{{componente.image}}" alt="{{ componente.nombre }}" />
+					</div>
 				</div>
-				<div class="ml-5 border rounded-xl p-5 w-2/5">
-					<div>
-						<p class="font-light my-2">{{componente.condicion}}</p>
+				<div class="border-t-2 border-t-neutral-500 pt-5 ">
+					<h1 class="text-white font-medium text-2xl">Descripción</h1>
+					<p class="text-lg mt-5">{{componente.descripcion}} </p>
+				</div>
+			</div>
+			<div class="flex items-center justify-center">
+				<div>
+					<div class="border-2 p-4 rounded-lg border-neutral-500 w-[500px] h-[400px]">
+						<span class="text-lg font-light">{{componente.condicion}} </span>
+						<div class="flex justify-between mt-4">
+							<h1 class="text-3xl font-medium">{{componente.nombre}} </h1>
+							{% if rol == 'Vendedor' %}
+							<button id="editButton" onclick="toggleForm()">
+								<iconify-icon icon="material-symbols:edit" width="30" height="30"
+									class="ml-4 hover:text-green-400"></iconify-icon>
+							</button>
 
-						<h1 class="text-3xl font-medium">{{componente.nombre}}</h1>
-					</div>
+							<div id="editForm"
+								class="bg-black bg-opacity-50 fixed top-0 left-0 w-full h-full flex items-center justify-center">
+								<div class="bg-neutral-800 rounded-md p-10">
+									<form method="post"
+										action="{{ url_for('editar_componente', componente_id=componente_id) }}">
+										<!-- Agrega los campos de edición necesarios -->
+										<div class="flex space-x-5">
+											<div class="space-y-3">
+												<h1 for="nombre" class="font-medium text-xl">
+													Nuevo Nombre:
+												</h1>
+												<input type="text" id="nombre" name="nombre" class="input rounded-md"
+													value="{{componente.nombre}}" />
+												<h1 for="descripcion" class="font-medium text-xl">
+													Nueva Descripción:
+												</h1>
+												<textarea id="descripcion" name="descripcion"
+													class="input rounded-md w-full h-20 p-2"></textarea>
+												<h1 for="precio" class="font-medium text-xl">
+													Nuevo Precio:
+												</h1>
+												<input type="number" id="precio" name="precio" class="input rounded-md"
+													step="0.01" value="{{componente.precio}}" />
+												<h1 for="stock" class="font-medium text-xl">
+													Nuevo Stock:
+												</h1>
+												<input type="number" id="stock" name="stock" class="input rounded-md"
+													value="{{componente.stock}}" />
+											</div>
+										</div>
+										<div class="mt-5 space-y-3">
+											<div class="flex items-center justify-center">
+												<button type="submit" value="Guardar cambios"
+													class="btn rounded-md hover:text-green-500">
+													Guardar cambios
+												</button>
+											</div>
+											<div class="flex items-center justify-center">
+												<button type="button" onclick="toggleForm()"
+													class="btn rounded-md hover:text-green-500">
+													Cancelar
+												</button>
+											</div>
+											<div class="flex items-center justify-center">
+												<button type="submit"
+													formaction="{{ url_for('eliminar_componente', componente_id=componente_id) }}"
+													class="btn rounded-md hover:text-green-500">Eliminar
+												</button>
 
-					<div class="my-5">
-						<h1 class="text-3xl font-light">S/ {{componente.precio}}</h1>
-						<a href=""
-							><p class="text-green-500 font-light">Ver métodos de pago</p></a
-						>
-					</div>
-					<div class="my-5">
-						<h1 class="font-light">Envíos a todo el país</h1>
-						<a href="">
-							<h1 class="font-light text-green-500">Métodos de envío</h1>
-						</a>
-					</div>
-					<div class="mb-5">
-						<a href="">
-							<div
-								class="btn rounded-md flex items-center border text-xl h-14 border-white hover:bg-green-500">
-								Comprar ahora
+											</div>
+										</div>
+									</form>
+								</div>
 							</div>
+
+							{% endif %}
+
+						</div>
+
+						<p class="font-light text-4xl mt-6">S/ {{'{:,.2f}'.format(componente.precio)}} </p>
+						<a href="">
+							<p class="font-light text-green-500">Métodos de pago</p>
 						</a>
+						<p class="font-light mt-6">Envíos a todo el país</p>
+						<a href="">
+							<p class="font-light text-green-500">Métodos de envío</p>
+						</a>
+						<div class="flex items-center justify-center mt-10">
+							{% if componente['stock'] >= 1 %}
+							<form
+								action="{{ url_for('agregar_carrito', user_id=user_id, componente_id=componente_id) }}"
+								method="post">
+								<button type="submit"
+									class="btn rounded-md w-80 border border-neutral-500 hover:bg-green-500 text-white">Comprar</button>
+							</form>
+							{% else %}
+							<button
+								class="btn rounded-md w-80 border border-neutral-500 hover:bg-red-500 text-white">Agotado</button>
+							{% endif %}
+
+
+
+						</div>
 					</div>
+					<div class="mt-24">
+						<div class="border-neutral-500 border-2 p-6 rounded-lg">
+							<h1 class="text-white font-medium text-2xl">Acerca del vendedor</h1>
+							<div class="flex mt-6">
+								<div class="w-40 h-40">
+									<img src="../static/img/Gps.jpg" alt=""
+										class="rounded-lg border-2 border-green-500 object-cover">
+								</div>
+								<div class="text-xl ml-6 space-y-2">
+									<p class="font-medium">{{vendedor.username}} </p>
+									<p class="font-light">+{{ time_elapsed }} vendiendo</p>
+									<p class="font-light">{{total_ventas}} Ventas </p>
+								</div>
 
-					<!-- Botón para activar el formulario de edición -->
-					{% if es_vendedor %}
-					<button
-						id="editButton"
-						onclick="toggleEditForm()"
-						class="hover:text-green-500">
-						<iconify-icon
-							icon="material-symbols:edit"
-							width="30"
-							height="30"
-							class="text-green-400"></iconify-icon>
-					</button>
-					{% endif %}
-				</div>
-			</div>
-			<div class="mt-5 flex justify-center items-center w-[1300px]">
-				<div class="w-3/5 p-5">
-					<h1>Descripción</h1>
-					<p>{{componente.descripcion}}</p>
-				</div>
-				<div class="w-2/5 border rounded-xl p-5 ml-5">
-					<h1 class="text-xl font-medium">Acerca del vendedor</h1>
+
+							</div>
+							<div class="mt-8">
+								<div class="flex items-center justify-center">
+									<div>
+										{{vendedor.ventas}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!-- Formulario de edición (inicialmente oculto) -->
-	<div
-		id="editForm"
-		class="hidden bg-neutral-800 fixed top-0 left-0 w-full h-full items-center justify-center">
-		<div class="bg-black bg-opacity-50 rounded-md p-10">
-			<form
-				method="post"
-				action="{{ url_for('editar_componente', componente_id=componente_id) }}">
-				<!-- Campos de edición -->
-				<label
-					for="nuevo_nombre"
-					class="font-medium text-xl"
-					>Nuevo Nombre:</label
-				>
-				<input
-					type="text"
-					id="nuevo_nombre"
-					name="nuevo_nombre"
-					value="{{ componente.nombre }}"
-					class="input rounded-md" />
-
-				<!-- Agrega más campos según tus necesidades -->
-
-				<button
-					type="submit"
-					class="btn rounded-md hover:text-green-500">
-					Guardar Cambios
-				</button>
-			</form>
-		</div>
+	{% with messages = get_flashed_messages(with_categories=true) %}
+	{% for category, message in messages %}
+	{% if category == 'success' %}
+	<div id="flash-messages"
+		class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-900 text-white px-4 py-2 rounded-md opacity-0 transition-opacity duration-500 w-[500px]">
+		<p>{{ message }}</p>
 	</div>
+
+
+	{% endif %}
+	{% endfor %}
+	{% endwith %}
 </div>
-
 <script>
-	function toggleEditForm() {
+
+
+	var flashMessages = document.getElementById('flash-messages');
+
+	// Ajusta la opacidad después de que la página se ha cargado
+	window.addEventListener('load', function () {
+		flashMessages.style.opacity = '1';
+	});
+
+	// Oculta los mensajes flash después de 3 segundos
+	setTimeout(function () {
+		flashMessages.style.opacity = '0';
+	}, 3000);
+
+
+</script>
+<script>
+	function toggleForm() {
 		var form = document.getElementById("editForm");
 		form.classList.toggle("hidden");
 	}
+
+	// Agrega esta función para prevenir la ejecución automática al cargar la página
+	document.addEventListener("DOMContentLoaded", function () {
+		var form = document.getElementById("editForm");
+		form.classList.add("hidden");
+	});
 </script>
 
 {% endblock %}
